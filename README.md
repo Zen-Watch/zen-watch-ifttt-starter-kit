@@ -1,6 +1,6 @@
 # Zen.Watch IFTTT Developer Starter Kit
 
-Zen.Watch starter kit for developers to build IFTTT triggers and actions
+Zen.Watch starter kit for developers to build IFTTT triggers and actions for https://zen.watch
 
 This is the open-source github repository behind the [Replit version of the developer kit](https://replit.com/@MarcoN4/ZenWatch-IFTTT-Starter-Kit).
 
