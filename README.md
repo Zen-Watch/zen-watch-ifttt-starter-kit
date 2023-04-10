@@ -8,6 +8,8 @@ We are maintaining this repo for the developers who prefer to build IFTTT templa
 
 This repo contains all the dependencies and versions used at product runtime to test your new triggers against.
 
+We plan to add to more fun IFTTT recipes to this open-source repository over the coming weeks and months! Stay tuned!
+
 ### Installation
 ``` npm install ```
 Installs the dependencies for the the app with node command.
