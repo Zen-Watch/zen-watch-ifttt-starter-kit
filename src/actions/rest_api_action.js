@@ -73,6 +73,49 @@ async function your_new_action(zenwatch, payload) {
     }
 }
 
+async function dynamic_fetch(zenwatch, payload) {
+    try {
+        const headers = payload.params.headers.reduce((acc, header) => {
+            if (header.key === "User-Agent") {
+                return acc;
+            }
+            acc[header.key] = header.value;
+            return acc;
+        }, {});
+        
+        headers["User-Agent"] = "Zen.Watch";
+
+        const body = payload.params.params.reduce((acc, param) => {
+            if (param === "params") {
+                return acc;
+            }
+
+            acc[param] = payload[param];
+            return acc;
+        }, {});
+
+        if (payload.params.method === "GET") {
+            const query = Object.keys(body).map((key) => `${key}=${body[key]}`).join("&");
+            payload.params.url = `${payload.params.url}?${query}`;
+        }
+        
+        const response = await fetch(payload.params.url, {
+            method: payload.params.method,
+            headers,
+            body: payload.params.method === "GET" ? undefined : JSON.stringify(body),
+        });
+
+        const resp_json = await response.json();
+        if (!response.ok) {
+            zenwatch.handle_error(resp_json);
+        } else {
+            zenwatch.handle_action(resp_json);
+        }
+    } catch (err) {
+        zenwatch.handle_fatal_error(err);
+    }
+}
+
 function invoke_action() {
 
     // ---- DO NOT MODIFY THIS CODE ----
