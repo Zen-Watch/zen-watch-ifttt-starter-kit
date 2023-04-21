@@ -108,6 +108,8 @@ async function dynamic_fetch(zenwatch, payload) {
         const resp_json = await response.json();
         if (!response.ok) {
             zenwatch.handle_error(resp_json);
+        } else {
+            zenwatch.handle_action(resp_json);
         }
     } catch (err) {
         zenwatch.handle_fatal_error(err);
